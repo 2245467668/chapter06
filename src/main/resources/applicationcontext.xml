@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--配置数据源-->
+   <bean id="helloSpring"  class="com.xmut.HelloSpring">
+       <property name="username" value="张三">
+       </property>
+   </bean>
+   <bean id="User1" class="com.xmut.User1"><!--结构体注入-->
+       <constructor-arg name="id" value="1"></constructor-arg>
+       <constructor-arg name="name" value="张三"></constructor-arg>
+       <constructor-arg name="password" value="123"></constructor-arg>
+   </bean>
+    <bean id="User2" class="com.xmut.User2"><!--set方法注入-->
+        <property name="id" value="2"></property>
+        <property name="name" value="李四"></property>
+        <property name="password" value="123"></property>
+    </bean>
+<!--   创建userDao的bean-->
+    <bean id="userDao" class="com.xmut.dao.imple.UserDaoImpl"></bean>
+<!--    创建userService的bean-->
+    <bean id="userService" class="com.xmut.service.impl.UserServiceImp"
+         autowire="byName">
+        <property name="userDao" ref="userDao"></property>
+        <!--ref是在userService下使用到userDao的使用时要引入-->
+    </bean>
+
+</beans>
